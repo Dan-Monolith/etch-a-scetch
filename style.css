@@ -5,14 +5,16 @@
     font-size: 0;
 }
     
-
 .pixel {
-    width : 17px;
-    height : 17px;
+    width: 17px;
+    height: 17px;
     margin: -1px;
     
-    background-color : white;
-    border : 1px solid black;
-    display: inline-block;
-    
+    background-color: white;
+    border: 1px solid black;
+    display: inline-block;    
 }    
+
+#resize {
+    margin: 10px auto; 
+}
