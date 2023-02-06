@@ -2,7 +2,7 @@
 // Iterate over an index to get the right grid size.
 // Add class and index to each created div and append to container.
 const square = document.querySelector('.square');
-const divNumber = 256;
+let divNumber = 256;
 for (let i = 0; i < 256; i++) {
     const div = document.createElement('div');
     div.classList.add('pixel');
@@ -28,11 +28,16 @@ pixels.forEach((div) => {
 
 // Add button that sends popup asking for the no. of squares per side. Limit 100.
 // New grid must generate in the same total space as before. 
-const button = document.getElementById(".resize");
-button.onclick = function (event) {
-    alert("Testing...");
-}
+let sizeInput;
+const resizeButton = document.querySelector(".resize");
+resize.addEventListener("click", () => {
+    sizeInput = prompt("How many squares per side?")
+});
 
 
-
-
+const resetButton = document.querySelector(".reset");
+reset.addEventListener("click", () => {
+    pixels.forEach((div) => {
+        div.style.backgroundColor = "white";
+    });
+});
