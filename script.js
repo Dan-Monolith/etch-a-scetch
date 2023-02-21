@@ -1,36 +1,54 @@
-// Create the container that will hold the pixels.
-// Iterate over an index to get the right grid size.
-// Add class and index to each created div and append to container.
-const square = document.querySelector('.square');
-let divNumber = 256;
-for (let i = 0; i < 256; i++) {
-    const div = document.createElement('div');
-    div.classList.add('pixel');
-    div.id = i + 1;
-    div.textContent = " ";
-    document.getElementById("square").appendChild(div);    
+const defaultSize = 16;
+
+let currentSize = defaultSize;
+
+function setCurrentSize(newSize) {
+    currentSize = newSize;
 }
 
-// Select all pixels and create a nodeList to loop through to attach eventListeners.
-const pixels = document.querySelectorAll(".pixel");
-pixels.forEach((div) => {
-    div.addEventListener("mouseover", () => {
-        div.style.backgroundColor = "black";
-    });
-});
+const sizeValue = document.getElementById('sizeValue');
+const sizeSlider = document.getElementById('sizeSlider');
+const grid = document.getElementById('grid');
 
-// Add button that sends popup asking for the no. of squares per side. Limit 100.
-// New grid must generate in the same total space as before. 
-let sizeInput;
-const resizeButton = document.querySelector(".resize");
-resize.addEventListener("click", () => {
-    sizeInput = prompt("How many squares per side?")
-});
+sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value);
+sizeSlider.onchange = (e) => changeSize(e.target.value);
+
+function changeSize(value) {
+    setCurrentSize(value);
+    updateSizeValue(value);
+    reloadGrid();
+};
+
+function updateSizeValue(value) {
+    sizeValue.innerHTML = `${value} x ${value}`;    
+};
+
+function reloadGrid() {
+    clearGrid();
+    setupGrid(currentSize);
+}
+
+function clearGrid() {
+    grid.innerHTML = '';
+};
 
 
-const resetButton = document.querySelector(".reset");
-reset.addEventListener("click", () => {
-    pixels.forEach((div) => {
-        div.style.backgroundColor = "white";
-    });
-});
+
+function setupGrid(size) {
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
+    for (let i = 0; i < size * size; i++) {
+        const gridElement = document.createElement('div');
+        gridElement.classList.add('grid-element');
+        //gridElement.addEventListener('mouseover', changeColor);
+        //gridElement.addEventListener('mousedown', changeColor);
+        grid.appendChild(gridElement); 
+    };
+};
+
+window.onload = () => {
+    setupGrid(defaultSize);
+};
+
+
