@@ -11,14 +11,7 @@ for (let i = 0; i < 256; i++) {
     document.getElementById("square").appendChild(div);    
 }
 
-//const pixels = document.querySelectorAll(".pixel");
-//pixels.forEach((div) => {
-//    div.addEventListener("mouseover", () => {
-//        console.log(div.id);
-//    });
-//});
-
-// Select all pixels and create a nodeList to loop through to attach eventListeners to.
+// Select all pixels and create a nodeList to loop through to attach eventListeners.
 const pixels = document.querySelectorAll(".pixel");
 pixels.forEach((div) => {
     div.addEventListener("mouseover", () => {
