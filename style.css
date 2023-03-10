@@ -1,10 +1,79 @@
-.body {
-    display: block;
-} 
-
-#resize {
-    margin: 10px auto; 
+body {
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family:Arial, Helvetica, sans-serif;
 }
+
+.header {
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    border-radius: 4%;
+    padding: 20px;
+    background-color: burlywood;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    align-items: center;
+}
+
+.sizeLabel {
+    margin: 5px;
+    font-size: larger;
+}
+
+.colorLabel {
+    margin: 5px;
+    font-size: larger;
+}
+
+#resetBtn {
+    width: 100px;
+    margin: 10px;
+    font-size: larger;
+}
+
+#gridBtn {
+    width: 100px;
+    margin: 10px;
+    font-size: larger;   
+}
+
+#fadeBtn {
+    width: 100px;
+    margin: 10px;
+    font-size: larger;    
+}
+
+#rainbowBtn {
+    width: 100px;
+    margin: 10px;
+    font-size: larger;   
+}
+
+#picker {
+    width: 60px;
+    height: 60px;   
+    font-size: medium;
+    background-color: transparent;
+    border-color: transparent;   
+}
+
+input[type='color']::-webkit-color-swatch {
+    border: none;
+    border-radius: 50px;
+  }
 
 #canvass {
     display: grid;
@@ -13,9 +82,17 @@
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
     border: 1px solid black;
+    border-radius: 2%;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
 .pixel {
     Background-color: white;
-    /*border: 1px ridge rgb(238, 238, 238);*/
+    border: 1px ridge rgb(238, 238, 238);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
 }

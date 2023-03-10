@@ -12,13 +12,25 @@
         <h1>Scribe</h1>
     </div>
     
-    <div class="controls">
-        <div id="sizeValue" class="size-value">16 x 16</div>
-        <input id="sizeSlider" type="range" value="16" min="1" max="64" />
-        <button type="button" id = "reset">Reset</button>
+    <div class="main">
+        <div class="controls">
+            <p class="sizeLabel">Resize</p>
+            <div id="sizeValue" class="size-value">16 x 16</div>
+            <input id="sizeSlider" type="range" value="16" min="1" max="64" />
+            <button type="button" id="resetBtn">Reset</button>
+            <button type="button" id="gridBtn">Grid</button>
+            <button type="button" id="fadeBtn">Fade</button>
+            <button type="button" id="rainbowBtn">Rainbow</button>
+            <p class="colorLabel">Colour</p>
+            <input type="color" id="picker">
+        </div>
+        
+        <div id="canvass" class="canvass"></div>
     </div>
-    
-    <div id="canvass" class="canvass"></div>
+
+    <div class="footer">
+        <p class="footerText"><script>document.write(new Date().getFullYear())</script> © Monolith Industries  </p>
+    </div>
 <script src="script.js" defer></script>    
 </body>
 

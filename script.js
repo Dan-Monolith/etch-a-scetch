@@ -1,4 +1,3 @@
-//global consts.
 const canvass = document.getElementById('canvass');
 const sizeSlider = document.getElementById('sizeSlider');
 let size = 16;
@@ -39,14 +38,21 @@ function drawGrid(size) {
         });
     });
 
-    const resetButton = document.querySelector(".reset");
-    reset.addEventListener("click", () => {
+    const resetButton = document.querySelector(".resetBtn");
+    resetBtn.addEventListener("click", () => {
         pixels.forEach((div) => {
             div.style.backgroundColor = "white";
         });
     });
-};
 
+    const gridButton = document.querySelector(".gridBtn");
+        gridBtn.addEventListener("click", () => {
+        pixels.forEach((div) => {
+            div.style.border = "none";
+        });
+    });
+};
+//instead of just div.style.border = none, use toggle to activate/deactivate
 
 window.onload = () => {
     drawGrid(size);
