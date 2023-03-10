@@ -1,40 +1,21 @@
 .body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#canvass {
-    display: inline-block;
-    width: 285px;
-    margin: 0 auto;
-    font-size: 0;
-}
-    
-.pixel {
-    width: 17px;
-    height: 17px;
-    margin: -1px;
-    
-    background-color: white;
-    border: 1px solid black;
-    display: inline-block;    
-}    
+    display: block;
+} 
 
 #resize {
     margin: 10px auto; 
 }
 
-#canvass2 {
+#canvass {
     display: grid;
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
-    
+    border: 1px solid black;
 }
 
-.pixel2 {
+.pixel {
     Background-color: white;
-    border: 1px solid black;
+    /*border: 1px ridge rgb(238, 238, 238);*/
 }
