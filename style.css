@@ -92,6 +92,10 @@ input[type='color']::-webkit-color-swatch {
     border: 1px ridge rgb(238, 238, 238);
 }
 
+.toggleGrid {
+    border: none;
+}
+
 .footer {
     position: absolute;
     bottom: 0;

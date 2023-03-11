@@ -24,31 +24,31 @@ function drawGrid(size) {
     for (let i = 0; i < size * size; i++) {
         const div = document.createElement('div');
         div.classList.add('pixel');
-        document.getElementById("canvass").appendChild(div); 
+        document.getElementById('canvass').appendChild(div); 
     };
 
     canvass.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     canvass.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
     // Select all pixels and create a nodeList to loop through to attach eventListeners.
-    const pixels = document.querySelectorAll(".pixel");
+    const pixels = document.querySelectorAll('.pixel');
     pixels.forEach((div) => {
-        div.addEventListener("mouseover", () => {
-            div.style.backgroundColor = "black";
+        div.addEventListener('mouseover', () => {
+            div.style.backgroundColor = 'black';
         });
     });
 
-    const resetButton = document.querySelector(".resetBtn");
-    resetBtn.addEventListener("click", () => {
+    const resetButton = document.querySelector('.resetBtn');
+    resetBtn.addEventListener('click', () => {
         pixels.forEach((div) => {
-            div.style.backgroundColor = "white";
+            div.style.backgroundColor = 'white';
         });
     });
 
-    const gridButton = document.querySelector(".gridBtn");
-        gridBtn.addEventListener("click", () => {
+    const gridButton = document.querySelector('.gridBtn');
+    gridBtn.addEventListener('click', () => {
         pixels.forEach((div) => {
-            div.style.border = "none";
+            div.classList.toggle('toggleGrid');
         });
     });
 };
