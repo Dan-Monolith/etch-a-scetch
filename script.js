@@ -1,10 +1,6 @@
 const canvass = document.getElementById('canvass');
 const sizeSlider = document.getElementById('sizeSlider');
 let size = 16;
-let ink = 'black';
-let rainbow = `hsl(${Math.random() * 360}, 100%, 50%)`
-
-let drawingMode = ink;
 
 sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value);
 sizeSlider.onchange = (e) => changeSize(e.target.value);
@@ -23,8 +19,6 @@ function changeSize(value) {
     drawGrid(size);
 }
 
-
-
 function drawGrid(size) {
     const canvass = document.querySelector('.canvass');
     for (let i = 0; i < size * size; i++) {
@@ -36,32 +30,70 @@ function drawGrid(size) {
     canvass.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     canvass.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
-    switchGrid();
-    switchReset();
-    switchRainbow();
-
     let mouseIsDown = false;
     document.body.onmousedown = () => (mouseIsDown = true);
     document.body.onmouseup = () => (mouseIsDown = false);
-
-
-
+ 
     const pixels = document.querySelectorAll('.pixel');
     pixels.forEach((div) => {
-        div.addEventListener('mouseover', () => {
+        div.addEventListener('mousemove', () => {
             if(mouseIsDown === true){
-                //div.classList.add(`${drawingMode}`);
-                div.style.backgroundColor = `${drawingMode}`;
+                div.addEventListener('mouseover', drawingMode)
             };    
         });
     });
-    
     pixels.forEach((div) => {
         div.addEventListener('click', () => {
-            //div.classList.add(`${drawingMode}`);
-            div.style.backgroundColor = `${drawingMode}`;
+            div.addEventListener('mouseover', drawingMode)
         });
     });
+};
+
+function drawingMode () {
+    switch (color) {
+        case 'ink':
+            pixels.forEach((div) => {
+                div.addEventListener('mousemove', () => {
+                    if(mouseIsDown === true){
+                        div.style.backgroundColor = 'black';
+                    };    
+                });
+            });
+            pixels.forEach((div) => {
+                div.addEventListener('click', () => {
+                    div.style.backgroundColor = 'black';
+                });
+            });
+            break;
+        case 'rainbow':
+            pixels.forEach((div) => {
+                div.addEventListener('mousemove', () => {
+                    if(mouseIsDown === true){
+                        div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    };    
+                });
+            });
+            pixels.forEach((div) => {
+                div.addEventListener('click', () => {
+                    div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                });
+            });
+            break;
+        default:
+            pixels.forEach((div) => {
+                div.addEventListener('mousemove', () => {
+                    if(mouseIsDown === true){
+                        div.style.backgroundColor = 'red';
+                    };    
+                });
+            });
+            pixels.forEach((div) => {
+                div.addEventListener('click', () => {
+                    div.style.backgroundColor = 'red';
+                });
+            });
+            break;
+    }
 };
 
 function switchReset (){
@@ -87,11 +119,9 @@ function switchGrid (){
 };
 
 function switchRainbow (){
-    const pixels = document.querySelectorAll('.pixel');
     const rainbowButton = document.querySelector('.rainbowBtn');
     rainbowBtn.addEventListener('click', () => {
-        drawingMode = rainbow;
-        console.log(drawingMode);
+
     });
 }
 
