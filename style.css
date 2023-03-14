@@ -96,14 +96,6 @@ input[type='color']::-webkit-color-swatch {
     border: none;
 }
 
-.ink {
-    background-color:black;
-}
-
-.fade{
-    filter: brightness(-10%);
-}
-
 .footer {
     position: absolute;
     bottom: 0;

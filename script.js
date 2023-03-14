@@ -1,6 +1,10 @@
 const canvass = document.getElementById('canvass');
 const sizeSlider = document.getElementById('sizeSlider');
 let size = 16;
+let ink = 'black';
+let rainbow = `hsl(${Math.random() * 360}, 100%, 50%)`
+
+let drawingMode = ink;
 
 sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value);
 sizeSlider.onchange = (e) => changeSize(e.target.value);
@@ -19,6 +23,8 @@ function changeSize(value) {
     drawGrid(size);
 }
 
+
+
 function drawGrid(size) {
     const canvass = document.querySelector('.canvass');
     for (let i = 0; i < size * size; i++) {
@@ -32,27 +38,28 @@ function drawGrid(size) {
 
     switchGrid();
     switchReset();
+    switchRainbow();
 
     let mouseIsDown = false;
-    document.addEventListener('mousedown', () => {
-        mouseIsDown = true;
-    });
-    document.addEventListener('mouseup', () => {
-        mouseIsDown = false;
-    });
+    document.body.onmousedown = () => (mouseIsDown = true);
+    document.body.onmouseup = () => (mouseIsDown = false);
+
+
 
     const pixels = document.querySelectorAll('.pixel');
     pixels.forEach((div) => {
         div.addEventListener('mouseover', () => {
             if(mouseIsDown === true){
-                div.classList.add(`${drawingMode}`);
+                //div.classList.add(`${drawingMode}`);
+                div.style.backgroundColor = `${drawingMode}`;
             };    
         });
     });
     
     pixels.forEach((div) => {
         div.addEventListener('click', () => {
-            div.classList.add(`${drawingMode}`);
+            //div.classList.add(`${drawingMode}`);
+            div.style.backgroundColor = `${drawingMode}`;
         });
     });
 };
@@ -62,8 +69,10 @@ function switchReset (){
     const resetButton = document.querySelector('.resetBtn');
     resetBtn.addEventListener('click', () => {
         pixels.forEach((div) => {
-            div.classList.remove(`${drawingMode}`);
+            div.style.backgroundColor = 'white';
         });
+        drawingMode = ink;
+        console.log(drawingMode);
     });
 };
 
@@ -77,16 +86,14 @@ function switchGrid (){
     });
 };
 
-let drawingMode = 'ink';
-
-function switchFade (){
-    const fadeButton = document.querySelector('.fadeBtn');
-    fadeBtn.addEventListener('click', () => {
-        let drawingMode = 'fade';
+function switchRainbow (){
+    const pixels = document.querySelectorAll('.pixel');
+    const rainbowButton = document.querySelector('.rainbowBtn');
+    rainbowBtn.addEventListener('click', () => {
+        drawingMode = rainbow;
         console.log(drawingMode);
-    })
-    
-};
+    });
+}
 
 window.onload = () => {
     drawGrid(size);
