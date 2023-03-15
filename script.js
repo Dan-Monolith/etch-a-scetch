@@ -38,63 +38,45 @@ function drawGrid(size) {
     pixels.forEach((div) => {
         div.addEventListener('mousemove', () => {
             if(mouseIsDown === true){
-                div.addEventListener('mouseover', drawingMode)
+                if(color === 'rainbow'){
+                    div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                }
+                else if (color === 'fade'){
+                    div.style.backgroundColor = 'grey'; 
+                }
+                else if (color === 'pick'){
+                    div.style.backgroundColor = 'purple';
+                }
+                else {
+                    div.style.backgroundColor = 'black';
+                }
+
             };    
         });
     });
     pixels.forEach((div) => {
         div.addEventListener('click', () => {
-            div.addEventListener('mouseover', drawingMode)
+            if(color === 'rainbow'){
+                div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            }
+            else if (color === 'fade'){
+                div.style.backgroundColor = 'grey'; 
+            }
+            else if (color === 'pick'){
+                div.style.backgroundColor = 'purple';
+            }
+            else {
+                div.style.backgroundColor = 'black';
+            } 
         });
     });
-};
 
-function drawingMode () {
-    switch (color) {
-        case 'ink':
-            pixels.forEach((div) => {
-                div.addEventListener('mousemove', () => {
-                    if(mouseIsDown === true){
-                        div.style.backgroundColor = 'black';
-                    };    
-                });
-            });
-            pixels.forEach((div) => {
-                div.addEventListener('click', () => {
-                    div.style.backgroundColor = 'black';
-                });
-            });
-            break;
-        case 'rainbow':
-            pixels.forEach((div) => {
-                div.addEventListener('mousemove', () => {
-                    if(mouseIsDown === true){
-                        div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                    };    
-                });
-            });
-            pixels.forEach((div) => {
-                div.addEventListener('click', () => {
-                    div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                });
-            });
-            break;
-        default:
-            pixels.forEach((div) => {
-                div.addEventListener('mousemove', () => {
-                    if(mouseIsDown === true){
-                        div.style.backgroundColor = 'red';
-                    };    
-                });
-            });
-            pixels.forEach((div) => {
-                div.addEventListener('click', () => {
-                    div.style.backgroundColor = 'red';
-                });
-            });
-            break;
-    }
+    switchReset();
+    switchGrid();
+    switchFade();
+    switchRainbow();
 };
+let color = 'black';
 
 function switchReset (){
     const pixels = document.querySelectorAll('.pixel');
@@ -103,8 +85,7 @@ function switchReset (){
         pixels.forEach((div) => {
             div.style.backgroundColor = 'white';
         });
-        drawingMode = ink;
-        console.log(drawingMode);
+        color = undefined;
     });
 };
 
@@ -118,12 +99,21 @@ function switchGrid (){
     });
 };
 
+function switchFade (){
+    const fadeButton = document.querySelector('.fadeBtn');
+    fadeBtn.addEventListener('click', () => {
+        color = 'fade';
+        console.log(color);            
+    });
+};
+
 function switchRainbow (){
     const rainbowButton = document.querySelector('.rainbowBtn');
     rainbowBtn.addEventListener('click', () => {
-
+        color = 'rainbow';
+        console.log(color);
     });
-}
+};
 
 window.onload = () => {
     drawGrid(size);
