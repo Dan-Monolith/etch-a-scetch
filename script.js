@@ -38,17 +38,17 @@ function drawGrid(size) {
     pixels.forEach((div) => {
         div.addEventListener('mousemove', () => {
             if(mouseIsDown === true){
-                if(color === 'rainbow'){
+                if(mode === 'rainbow'){
                     div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
                 }
-                else if (color === 'fade'){
-                    div.style.backgroundColor = 'grey'; 
+                else if (mode === 'fade'){
+                    //div.style.backgroundColor = `hsl(0, 0%, ${light + increment})`; 
                 }
-                else if (color === 'pick'){
+                else if (mode === 'pick'){
                     div.style.backgroundColor = 'purple';
                 }
                 else {
-                    div.style.backgroundColor = 'black';
+                    div.style.backgroundColor = color;
                 }
 
             };    
@@ -56,17 +56,21 @@ function drawGrid(size) {
     });
     pixels.forEach((div) => {
         div.addEventListener('click', () => {
-            if(color === 'rainbow'){
+            if(mode === 'rainbow'){
                 div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
             }
-            else if (color === 'fade'){
-                div.style.backgroundColor = 'grey'; 
+            else if (mode === 'fade'){
+                div.style.backgroundColor = 'hsl(0, 0%, 80%)';
+                let increment = -10;
+                return(div.style.backgroundColor);
+                console.log(div.style.backgroundColor);
+                //div.style.backgroundColor = `hsl(0, 0%, ${light + increment})`;
             }
-            else if (color === 'pick'){
-                div.style.backgroundColor = 'purple';
+            else if (mode === 'pick'){
+                color = 'hsla(305, 100%, 50%)';
             }
             else {
-                div.style.backgroundColor = 'black';
+                div.style.backgroundColor = color;
             } 
         });
     });
@@ -76,6 +80,8 @@ function drawGrid(size) {
     switchFade();
     switchRainbow();
 };
+
+let mode = 'default';
 let color = 'black';
 
 function switchReset (){
@@ -85,7 +91,7 @@ function switchReset (){
         pixels.forEach((div) => {
             div.style.backgroundColor = 'white';
         });
-        color = undefined;
+        color = 'hsla(0, 0%, 0%)';
     });
 };
 
@@ -102,16 +108,16 @@ function switchGrid (){
 function switchFade (){
     const fadeButton = document.querySelector('.fadeBtn');
     fadeBtn.addEventListener('click', () => {
-        color = 'fade';
-        console.log(color);            
+        mode = 'fade';
+        console.log(mode);            
     });
 };
 
 function switchRainbow (){
     const rainbowButton = document.querySelector('.rainbowBtn');
     rainbowBtn.addEventListener('click', () => {
-        color = 'rainbow';
-        console.log(color);
+        mode = 'rainbow';
+        console.log(mode);
     });
 };
 
