@@ -88,7 +88,7 @@ input[type='color']::-webkit-color-swatch {
 }
 
 .pixel {
-    background-color: white;
+    background-color: hsla(0, 0%, 100%);
     border: 1px ridge rgb(238, 238, 238);
 }
 

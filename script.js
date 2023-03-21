@@ -42,7 +42,7 @@ function drawGrid(size) {
                     div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
                 }
                 else if (mode === 'fade'){
-                    //div.style.backgroundColor = `hsl(0, 0%, ${light + increment})`; 
+                     
                 }
                 else if (mode === 'pick'){
                     div.style.backgroundColor = 'purple';
@@ -60,14 +60,18 @@ function drawGrid(size) {
                 div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
             }
             else if (mode === 'fade'){
-                div.style.backgroundColor = 'hsl(0, 0%, 80%)';
-                let increment = -10;
-                return(div.style.backgroundColor);
-                console.log(div.style.backgroundColor);
-                //div.style.backgroundColor = `hsl(0, 0%, ${light + increment})`;
+                div.style.backgroundColor = color;
+                console.log(color);
+                let currentDarkness  = div.style.backgroundColor;
+                let currentColor = div.style.backgroundColor;
+                console.log(currentDarkness);
+                console.log(currentColor);
+                darker = (Number(currentDarkness) - 10);
+                div.style.backgroundColor = `hsl()`
+                
             }
             else if (mode === 'pick'){
-                color = 'hsla(305, 100%, 50%)';
+                div.style.backgroundColor = color;
             }
             else {
                 div.style.backgroundColor = color;
@@ -81,8 +85,9 @@ function drawGrid(size) {
     switchRainbow();
 };
 
+
 let mode = 'default';
-let color = 'black';
+let color = 'hsl(0, 0%, 0%)';
 
 function switchReset (){
     const pixels = document.querySelectorAll('.pixel');
@@ -91,7 +96,7 @@ function switchReset (){
         pixels.forEach((div) => {
             div.style.backgroundColor = 'white';
         });
-        color = 'hsla(0, 0%, 0%)';
+        mode = 'default';
     });
 };
 
