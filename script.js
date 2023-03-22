@@ -1,12 +1,18 @@
 const canvass = document.getElementById('canvass');
 const sizeSlider = document.getElementById('sizeSlider');
+const picker = document.getElementById('picker');
 let size = 16;
 
 sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value);
 sizeSlider.onchange = (e) => changeSize(e.target.value);
+picker.oninput = (e) => updateColor(e.target.value);
 
 function updateSizeValue(value) {
     sizeValue.innerHTML = `${value} x ${value}`;    
+};
+
+function updateColor (newColor) {
+    color = newColor;
 };
 
 function clearGrid() {
@@ -19,6 +25,10 @@ function changeSize(value) {
     drawGrid(size);
 }
 
+let mouseIsDown = false;
+document.body.onmousedown = () => (mouseIsDown = true);
+document.body.onmouseup = () => (mouseIsDown = false);
+
 function drawGrid(size) {
     const canvass = document.querySelector('.canvass');
     for (let i = 0; i < size * size; i++) {
@@ -29,10 +39,6 @@ function drawGrid(size) {
 
     canvass.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     canvass.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-
-    let mouseIsDown = false;
-    document.body.onmousedown = () => (mouseIsDown = true);
-    document.body.onmouseup = () => (mouseIsDown = false);
  
     const pixels = document.querySelectorAll('.pixel');
     pixels.forEach((div) => {
@@ -80,8 +86,6 @@ function drawGrid(size) {
             } 
         });
     });
-
-
 
     switchReset();
     switchGrid();
