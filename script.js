@@ -37,14 +37,19 @@ function drawGrid(size) {
     const pixels = document.querySelectorAll('.pixel');
     pixels.forEach((div) => {
         div.addEventListener('mousemove', () => {
-            if(mouseIsDown === true){
-                if(mode === 'rainbow'){
+            if(mouseIsDown === true) {
+                if(mode === 'rainbow') {
                     div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
                 }
-                else if (mode === 'fade'){
-                     
+                else if (mode === 'fade') {
+                    let currentColor  = div.style.backgroundColor;
+                    makeHsl(currentColor);
+                    currentColor = `hsl(${H}, ${S}%, ${L}%)`;
+                    newL = (L + 1);
+                    newColor = `hsl(${H}, ${S}%, ${newL}%)`;
+                    div.style.backgroundColor = newColor;  
                 }
-                else if (mode === 'pick'){
+                else if (mode === 'pick') {
                     div.style.backgroundColor = 'purple';
                 }
                 else {
@@ -56,21 +61,18 @@ function drawGrid(size) {
     });
     pixels.forEach((div) => {
         div.addEventListener('click', () => {
-            if(mode === 'rainbow'){
+            if(mode === 'rainbow') {
                 div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
             }
-            else if (mode === 'fade'){
-                div.style.backgroundColor = color;
-                console.log(color);
-                let currentDarkness  = div.style.backgroundColor;
-                let currentColor = div.style.backgroundColor;
-                console.log(currentDarkness);
-                console.log(currentColor);
-                darker = (Number(currentDarkness) - 10);
-                div.style.backgroundColor = `hsl()`
-                
+            else if (mode === 'fade') {
+                let currentColor  = div.style.backgroundColor;
+                makeHsl(currentColor);
+                currentColor = `hsl(${H}, ${S}%, ${L}%)`;
+                newL = (L + 5);
+                newColor = `hsl(${H}, ${S}%, ${newL}%)`;
+                div.style.backgroundColor = newColor;                
             }
-            else if (mode === 'pick'){
+            else if (mode === 'pick') {
                 div.style.backgroundColor = color;
             }
             else {
@@ -79,17 +81,63 @@ function drawGrid(size) {
         });
     });
 
+
+
     switchReset();
     switchGrid();
     switchFade();
     switchRainbow();
 };
 
+let red = 'rgb(191, 13, 13)';
+let test = 'rgb(0, 0, 255)';
+
+function makeHsl (rgb) {
+    rgbExtractor(rgb);
+    RGBToHSL(r, g, b);
+};
+
+let r;
+let g;
+let b;
+
+function rgbExtractor (rgb) {
+    let onlyBrackets = rgb.slice(3);
+    let onlyNumber = onlyBrackets.slice(0, -1);
+    let onlyNumbers = onlyNumber.slice(1);
+    let newArr = onlyNumbers.split(",");
+    r = Number(newArr[0]);
+    g = Number(newArr[1]);
+    b = Number(newArr[2]);
+};
+
+let H;
+let S;
+let L;
+
+const RGBToHSL = (r, g, b) => {
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    const l = Math.max(r, g, b);
+    const s = l - Math.min(r, g, b);
+    const h = s
+      ? l === r
+        ? (g - b) / s
+        : l === g
+        ? 2 + (b - r) / s   
+        : 4 + (r - g) / s
+      : 0;
+    
+    H =  60 * h < 0 ? 60 * h + 360 : 60 * h;
+    S =  100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0);
+    L =  (100 * (2 * l - s)) / 2  
+};
 
 let mode = 'default';
 let color = 'hsl(0, 0%, 0%)';
 
-function switchReset (){
+function switchReset () {
     const pixels = document.querySelectorAll('.pixel');
     const resetButton = document.querySelector('.resetBtn');
     resetBtn.addEventListener('click', () => {
@@ -97,10 +145,11 @@ function switchReset (){
             div.style.backgroundColor = 'white';
         });
         mode = 'default';
+        color = 'hsl(0, 0%, 0%)';
     });
 };
 
-function switchGrid (){
+function switchGrid () {
     const pixels = document.querySelectorAll('.pixel');
     const gridButton = document.querySelector('.gridBtn');
     gridBtn.addEventListener('click', () => {
@@ -110,19 +159,17 @@ function switchGrid (){
     });
 };
 
-function switchFade (){
+function switchFade () {
     const fadeButton = document.querySelector('.fadeBtn');
     fadeBtn.addEventListener('click', () => {
-        mode = 'fade';
-        console.log(mode);            
+        mode = 'fade';          
     });
 };
 
-function switchRainbow (){
+function switchRainbow () {
     const rainbowButton = document.querySelector('.rainbowBtn');
     rainbowBtn.addEventListener('click', () => {
         mode = 'rainbow';
-        console.log(mode);
     });
 };
 

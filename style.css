@@ -1,5 +1,5 @@
 body {
-    background-color: lightblue;
+    background-color: hsl(195, 53%, 79%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,17 +8,17 @@ body {
 
 .header {
     color: white;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    text-shadow: 1px 1px 2px hsl(0, 0%, 0%), 0 0 25px hsl(240, 100%, 50%), 0 0 5px hsl(240, 100%, 27%);
 }
 
 .main {
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
+    border: 1px solid hsl(0, 0%, 0%);
     border-radius: 4%;
     padding: 20px;
-    background-color: burlywood;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    background-color: hsl(34, 57%, 70%);
+    box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, 0.4), 0 6px 20px 0 hsla(0, 0%, 0%, 0.4);
 }
 
 .controls {
@@ -81,15 +81,15 @@ input[type='color']::-webkit-color-swatch {
     height: 500px;
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
-    border: 1px solid black;
+    border: 1px solid hsl(0, 0%, 0%);
     border-radius: 2%;
     overflow: hidden;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, 0.4), 0 6px 20px 0 hsla(0, 0%, 0%, 0.4);
 }
 
 .pixel {
-    background-color: hsla(0, 0%, 100%);
-    border: 1px ridge rgb(238, 238, 238);
+    background-color: hsl(0, 0%, 100%);
+    border: 1px ridge hsl(0, 0%, 93%);
 }
 
 .toggleGrid {
