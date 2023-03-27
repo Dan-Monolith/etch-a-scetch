@@ -13,6 +13,7 @@ function updateSizeValue(value) {
 
 function updateColor (newColor) {
     color = newColor;
+    mode = 'pick';
 };
 
 function clearGrid() {
@@ -25,9 +26,9 @@ function changeSize(value) {
     drawGrid(size);
 }
 
-let mouseIsDown = false;
-document.body.onmousedown = () => (mouseIsDown = true);
-document.body.onmouseup = () => (mouseIsDown = false);
+//let mouseIsDown = false;
+//document.body.onmousedown = () => (mouseIsDown = true);
+//document.body.onmouseup = () => (mouseIsDown = false);
 
 function drawGrid(size) {
     const canvass = document.querySelector('.canvass');
@@ -42,8 +43,9 @@ function drawGrid(size) {
  
     const pixels = document.querySelectorAll('.pixel');
     pixels.forEach((div) => {
-        div.addEventListener('mousemove', () => {
-            if(mouseIsDown === true) {
+        div.addEventListener('mouseover', () => {
+            //if(mouseIsDown === true) {
+                //console.log(mouseIsDown);
                 if(mode === 'rainbow') {
                     div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
                 }
@@ -51,22 +53,24 @@ function drawGrid(size) {
                     let currentColor  = div.style.backgroundColor;
                     makeHsl(currentColor);
                     currentColor = `hsl(${H}, ${S}%, ${L}%)`;
-                    newL = (L + 1);
+                    newL = (L + 5);
                     newColor = `hsl(${H}, ${S}%, ${newL}%)`;
                     div.style.backgroundColor = newColor;  
                 }
                 else if (mode === 'pick') {
-                    div.style.backgroundColor = 'purple';
+                    div.style.backgroundColor = color;
                 }
                 else {
+                    color = 'hsl(0 0% 0%)';
                     div.style.backgroundColor = color;
                 }
 
-            };    
+            //};    
         });
     });
     pixels.forEach((div) => {
         div.addEventListener('click', () => {
+            //console.log(mouseIsDown);
             if(mode === 'rainbow') {
                 div.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
             }
@@ -82,6 +86,7 @@ function drawGrid(size) {
                 div.style.backgroundColor = color;
             }
             else {
+                color = 'hsl(0 0% 0%)';
                 div.style.backgroundColor = color;
             } 
         });
