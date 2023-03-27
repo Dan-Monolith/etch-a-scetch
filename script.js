@@ -25,7 +25,7 @@ function changeSize(value) {
     clearGrid();
     drawGrid(size);
 }
-
+ // Re implement later
 //let mouseIsDown = false;
 //document.body.onmousedown = () => (mouseIsDown = true);
 //document.body.onmouseup = () => (mouseIsDown = false);
